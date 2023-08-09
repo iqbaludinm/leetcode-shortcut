@@ -1,5 +1,13 @@
 # Penjelasan
 
+## Table of Contents
+
+- [Pertanyaan](#pertanyaan)
+- [Jawaban](#jawaban)
+  - [Jawaban Pertama](#jawaban-pertama)
+  - [Jawaban Kedua](#jawaban-kedua)
+- [BONUS TIME 🚀🚨🚦🚧🚩](#bonus-time-🚀🚨🚦🚧🚩)
+
 ## Pertanyaan 
 Singkatnya, pada soal two-sum ini kita disuruh membuat function yang menerima dua parameter berupa nums (berbentuk array/slice) dan target (berbentuk integer). Kemudian, kita disuruh tebak angka target itu berdasarkan elemen-elemen yang ada pada array tsb.
 
@@ -27,6 +35,8 @@ Sebenernya gua udah submit 2 jawaban. [Jawaban Pertama](#jawaban-pertama) dan [J
 
 TC = Time Complexity
 ```
+// PAKE ALGORITMA BRUTE FORCE atau O(n^2)
+
 func twoSum(nums []int, target int) []int {
 	var temp []int
 	for idxI, i := range nums {   -> TC = O(n)....1
@@ -41,15 +51,22 @@ func twoSum(nums []int, target int) []int {
 }
 ```
 
-Penjelasan:
+**BACA ALUR:**
+
+1. Looping pertama buat ngeloop seluruh array tapi untuk satu element
+2. Looping kedua buat ngeloop seluruh element didalamnya dengan mengombinasikan satu element dari looping pertama
+3. Ibaratnya permutasi, looping pertama = 1 looping kedua 1, 2, 3
+4. Jadi if disitu jika `i+j` maksudnya adalah jika 1+1, 1+2, atau 1+3 apakah sama dengan target kita
+
+**PENJELASAN**:
 
 Kode diatas itu time-complexity nya sebesar $O(n^2)$. Kenapa bisa gitu? Coba lo liat TC ke-1, disitu ada looping. 
 
 Pada dasarnya looping itu memakan waktu $O(n)$. Kenapa bisa looping = $O(n)$. Ya karena proses itu akan memakan waktu sebanyak n kali atau sebanyak banyaknya element. MIKIR! 
 
-Analoginya, lo lagi di kantin dan mau cari harga makanan yang murah. Yaa mau gamau pilihannya antara lo liatin menu tu masing-masing toko atau kan tanya. Terlepas dari dua itu ya intinya kan lo bakal cari tau ke masing-masing kantin. Jadi?
+Analoginya, lo lagi di kantin dan mau cari harga makanan yang murah. Yaa mau gamau pilihannya antara lo liatin menu tu masing-masing toko atau tanya 1 per 1. Terlepas dari dua itu ya intinya kan lo bakal cari tau ke masing-masing kantin. Jadi?
 
-Jadi, ya lo bakal cari tau sebanyak jumlah toko-toko yang ada di kantin itu. Itulah mengapa looping memiliki time-complexity = $O(n^2)$
+Jadi, ya lo bakal cari tau sebanyak jumlah toko-toko yang ada di kantin itu atau sama dengan lo ngulang-ngulang pertanyaan yang sama disetiap toko. Itulah mengapa looping memiliki time-complexity = $O(n)$
 
 Kesimpulan:
 
@@ -64,6 +81,8 @@ Time Complexity dari kode diatas sebesar $O(n^2)$ karena $O(n)$ x $O(n)$ alias l
 Nah, ini jawaban kedua kudu optimasi. Karena biasanya dalam technical test, kita dihadapkan suatu case - kerjain - ditanya time and space complexitynya - bisa dioptimasi lagi ga? (kadang, tapi biasanya ada aja begini)
 
 ```
+// PAKE ALGORITMA HASH MAP
+
 func twoSum(nums []int, target int) []int {
     temp := make(map[int]int)
 	for i := 0; i < len(nums); i++ {    -> TC = O(n)....1
@@ -77,7 +96,22 @@ func twoSum(nums []int, target int) []int {
 }
 ```
 
-Penjelasan:
+**BACA ALUR:**
+
+Berikut langkah-langkah algoritma dalam kode tersebut:
+
+Mari kita jalankan algoritma Two Sum dengan masukan nums = [2, 7, 11, 15] dan target = 9.
+
+1. Kita membuat objek map yang awalnya kosong untuk menyimpan angka-angka dan indeksnya.
+2. Iterasi dimulai dengan nilai i sama dengan 0, karena array berindeks dari 0.
+3. Pada iterasi pertama, nums[0] adalah 2. Hitung complement dengan mengurangkan target (9) dengan angka saat ini (2), sehingga complement = 7.
+4. Periksa apakah complement (7) sudah ada dalam objek map. Karena objek masih kosong, complement belum ditemukan.
+5. Masukkan angka saat ini (nums[0] = 2) dan indeksnya (0) ke dalam objek map, sehingga map menjadi: { 2: 0 }.
+6. Pindah ke iterasi berikutnya dengan i = 1. Pada iterasi ini, nums[1] adalah 7. Hitung complement dengan mengurangkan target (9) dengan angka saat ini (7), sehingga complement = 2.
+7. Periksa apakah complement (2) sudah ada dalam objek map. Karena complement sudah ada dalam objek, kita telah menemukan pasangan angka yang jumlahnya sama dengan target (9). Kembalikan indeks dari angka complement (2) dan indeks saat ini (1) dalam bentuk array [map[complement], i], yang dalam hal ini adalah [0, 1].
+8. Selesai. Algoritma mengembalikan hasil [0, 1], yang berarti angka pada indeks 0 dan 1 dari array nums (yaitu 2 dan 7) memiliki jumlah 9, sesuai dengan target yang ditentukan..
+
+**PENJELASAN:**
 
 Kode diatas itu punya time-complexity sebesar $O(n)$, KOK BISA? Ya bisalah
 
@@ -93,7 +127,7 @@ Kesimpulan:
 
 Jadi, $O(log n)$ dioperasi pengurangan `complement := target - nums[i]` ini tidak berlaku dikarenakan itu hanya pengurangan b aja. 
 
-Time Complexity dari kode diatas sebesar $O(n)$ karena $O(n)$ x $O(1)$ x $O(1)$ x $O(1)$ = x $O(n)$
+Time Complexity dari kode diatas sebesar $O(n)$ karena $O(n)$ x $O(1)$ x $O(1)$ x $O(1)$ = $O(n)$
 
 
 **Hasil Compile Kode Jawaban Kedua:**
